@@ -1,0 +1,91 @@
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: #f3f0e8;
+  color: #16150f;
+  font-family: var(--font-space-grotesk), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: #16150f; color: #f3f0e8; }
+
+body::-webkit-scrollbar { width: 9px; }
+body::-webkit-scrollbar-track { background: #e6e2d7; }
+body::-webkit-scrollbar-thumb { background: #c3bdac; }
+
+em { font-style: italic; }
+
+/* Theme tokens + root surface (ported from the original #root inline vars). */
+.root {
+  --accent: #0E7C86;
+  --paper: #f3f0e8;
+  --paper2: #ece8dc;
+  --ink: #16150f;
+  --ink2: #33322a;
+  --muted: #76746a;
+  --line: rgba(22, 21, 15, .15);
+  --dark: #13130f;
+  --dline: rgba(243, 240, 232, .16);
+  position: relative;
+  width: 100%;
+  background: var(--paper);
+}
+
+@keyframes heroUp { from { opacity: 0; transform: translateY(108%); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes kenBurns { from { transform: scale(1.03); } to { transform: scale(1.12); } }
+@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: .18; } }
+@keyframes riseUp { from { transform: translateY(28px); } to { transform: translateY(0); } }
+@keyframes floatY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.55); opacity: .45; } }
+@keyframes panelOpen { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes loaderOut { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+/* Accessible "skip to content" link — visually hidden until keyboard-focused. */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  padding: 10px 16px;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-jetbrains-mono), monospace;
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-decoration: none;
+  transform: translateY(-150%);
+  transition: transform .2s ease;
+}
+.skip-link:focus { transform: translateY(0); outline: 2px solid var(--accent); }
+
+/* Mobile / small-tablet: stack the multi-column Work and Experience rows into a
+   single column so titles, tags and body text get the full width (no cramped
+   columns). Desktop keeps its inline multi-column grid untouched. */
+@media (max-width: 768px) {
+  .work-row { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .exp-row { grid-template-columns: 1fr !important; gap: 16px !important; }
+}
+
+/* On phones the About section is a single column, so show the (landscape) photo
+   at its natural aspect ratio instead of cropping it into a tall portrait box. */
+@media (max-width: 640px) {
+  .about-photo { height: auto !important; object-fit: contain !important; }
+}
+
+/* Respect users who prefer reduced motion: neutralise the infinite/decorative animations. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

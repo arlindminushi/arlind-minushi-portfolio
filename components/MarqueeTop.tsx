@@ -1,0 +1,10 @@
+export default function MarqueeTop() {
+  return (
+    <div style={{ overflow: 'hidden', borderBlock: '1px solid var(--line)', padding: '16px 0', WebkitMaskImage: 'linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)', maskImage: 'linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)' }}>
+      <div style={{ display: 'flex', gap: 40, width: 'max-content', animation: 'marquee 32s linear infinite', fontFamily: 'var(--font-jetbrains-mono)', fontSize: 'clamp(13px,1.5vw,17px)', color: 'var(--ink2)', whiteSpace: 'nowrap', letterSpacing: '.04em' }}>
+        <span style={{ display: 'flex', gap: 40 }}>Python<span style={{ color: 'var(--accent)' }}>×</span>Django<span style={{ color: 'var(--accent)' }}>×</span>React<span style={{ color: 'var(--accent)' }}>×</span>TypeScript<span style={{ color: 'var(--accent)' }}>×</span>Databricks<span style={{ color: 'var(--accent)' }}>×</span>Azure AD<span style={{ color: 'var(--accent)' }}>×</span>AWS<span style={{ color: 'var(--accent)' }}>×</span>React Native<span style={{ color: 'var(--accent)' }}>×</span>PostgreSQL<span style={{ color: 'var(--accent)' }}>×</span>OAuth 2.0<span style={{ color: 'var(--accent)' }}>×</span>Docker<span style={{ color: 'var(--accent)' }}>×</span>Unity Catalog<span style={{ color: 'var(--accent)' }}>×</span></span>
+        <span aria-hidden="true" style={{ display: 'flex', gap: 40 }}>Python<span style={{ color: 'var(--accent)' }}>×</span>Django<span style={{ color: 'var(--accent)' }}>×</span>React<span style={{ color: 'var(--accent)' }}>×</span>TypeScript<span style={{ color: 'var(--accent)' }}>×</span>Databricks<span style={{ color: 'var(--accent)' }}>×</span>Azure AD<span style={{ color: 'var(--accent)' }}>×</span>AWS<span style={{ color: 'var(--accent)' }}>×</span>React Native<span style={{ color: 'var(--accent)' }}>×</span>PostgreSQL<span style={{ color: 'var(--accent)' }}>×</span>OAuth 2.0<span style={{ color: 'var(--accent)' }}>×</span>Docker<span style={{ color: 'var(--accent)' }}>×</span>Unity Catalog<span style={{ color: 'var(--accent)' }}>×</span></span>
+      </div>
+    </div>
+  );
+}

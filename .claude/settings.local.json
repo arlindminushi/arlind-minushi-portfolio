@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/c/Users/Admin/Desktop/**)",
+      "Read(//c/c/Users/Admin/Desktop/Webijem/**)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\Admin\\\\Desktop\\\\Webijem\\\\index.html\")",
+      "PowerShell(\"opened in default browser\")",
+      "Bash(cd \"/c/Users/Admin/Desktop/foto\" && ls -la)",
+      "Read(//c/Users/Admin/Desktop/foto/**)",
+      "PowerShell(\"reopened in browser\")",
+      "PowerShell(\"reopened\")"
+    ]
+  }
+}
