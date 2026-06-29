@@ -270,6 +270,26 @@ export const chatQA: ChatQA[] = [
   },
 ];
 
+// "Click for a laugh" — dad jokes for the Bits of me section. Mix of classic
+// and developer flavour. Edit freely.
+export const dadJokes: string[] = [
+  "Why do programmers prefer dark mode? Because light attracts bugs. 🐛",
+  "I'd tell you a UDP joke, but you might not get it. 📡",
+  "Why did the developer go broke? He used up all his cache. 💸",
+  "A SQL query walks up to two tables in a bar and asks: 'Can I join you?' 🍺",
+  "How do you comfort a JavaScript bug? You console it. 🫂",
+  "Why was the function sad after the party? Nobody called it back. ☎️",
+  "I changed my password to 'incorrect', so my laptop just tells me when I forget it. 🔐",
+  "There are 10 kinds of people: those who read binary and those who don't. 🔢",
+  "Why did the React component go to therapy? Too many unresolved props. ⚛️",
+  "I'm reading a book on anti-gravity. It's impossible to put down. 📖",
+  "Why don't skeletons fight each other? They just don't have the guts. 💀",
+  "I only know 25 letters of the alphabet. I don't know y. 🤷",
+  "Parallel lines have so much in common… shame they'll never meet. 📐",
+  "I used to hate facial hair, but then it grew on me. 🧔",
+  "What do you call a fish with no eyes? A fsh. 🐟",
+];
+
 export type GalleryItem = {
   src: string;
   alt: string;

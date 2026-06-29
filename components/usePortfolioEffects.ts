@@ -262,6 +262,104 @@ export default function usePortfolioEffects() {
       });
     }
 
+    /* ---- "easy there" easter egg: frantic mouse movement -> playful toast ---- */
+    if (
+      !(
+        typeof window.matchMedia === "function" &&
+        window.matchMedia("(pointer: coarse)").matches
+      )
+    ) {
+      const jokes = [
+        "Whoa there, speed racer — the site isn't going anywhere 🏎️",
+        "Easy, tiger 🐯 — savour the portfolio.",
+        "404: chill not found 😅",
+        "You move the mouse like you ship code. Fast. Respect 🚀",
+        "Slow down there, Speedy Gonzales 🌀",
+        "Caffeine levels: dangerously high ☕",
+        "The mouse would like to file for a short break 🐭",
+        "That's a lot of mileage on that cursor 🛞",
+      ];
+      let energy = 0;
+      let lx = 0, ly = 0, lt = 0, hasLast = false;
+      let cooldownUntil = 0, lastIdx = -1;
+      let toastEl: HTMLDivElement | null = null;
+      let toastTxt: HTMLSpanElement | null = null;
+      let toastTimer = 0;
+
+      const showToast = (msg: string) => {
+        if (toastTimer) clearTimeout(toastTimer);
+        if (!toastEl) {
+          toastEl = document.createElement("div");
+          toastEl.setAttribute("role", "status");
+          toastEl.style.cssText =
+            "position:fixed;top:18px;left:50%;z-index:99999;display:flex;align-items:center;gap:10px;max-width:min(92vw,460px);padding:12px 18px;background:var(--ink);color:var(--paper);font-family:var(--font-jetbrains-mono),monospace;font-size:13px;letter-spacing:.02em;line-height:1.4;border-radius:999px;box-shadow:0 18px 44px -18px rgba(0,0,0,.55);pointer-events:none;transform:translateX(-50%);";
+          const dot = document.createElement("span");
+          dot.style.cssText = "width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;";
+          toastTxt = document.createElement("span");
+          toastEl.appendChild(dot);
+          toastEl.appendChild(toastTxt);
+          rootEl.appendChild(toastEl);
+        }
+        if (toastTxt) toastTxt.textContent = msg;
+        const el = toastEl;
+        try {
+          el.animate(
+            reduce
+              ? [{ opacity: 0 }, { opacity: 1 }]
+              : [
+                  { opacity: 0, transform: "translateX(-50%) translateY(-16px) scale(.96)" },
+                  { opacity: 1, transform: "translateX(-50%) translateY(0) scale(1)" },
+                ],
+            { duration: 380, easing: "cubic-bezier(.16,1,.3,1)", fill: "both" }
+          );
+        } catch {
+          el.style.opacity = "1";
+        }
+        toastTimer = window.setTimeout(() => {
+          try {
+            const a = el.animate(
+              reduce
+                ? [{ opacity: 1 }, { opacity: 0 }]
+                : [
+                    { opacity: 1, transform: "translateX(-50%) translateY(0) scale(1)" },
+                    { opacity: 0, transform: "translateX(-50%) translateY(-12px) scale(.97)" },
+                  ],
+              { duration: 300, easing: "ease-in", fill: "both" }
+            );
+            a.onfinish = () => { el.remove(); if (toastEl === el) { toastEl = null; toastTxt = null; } };
+          } catch {
+            el.remove();
+            if (toastEl === el) { toastEl = null; toastTxt = null; }
+          }
+        }, 3200);
+      };
+
+      const onShake = (e: MouseEvent) => {
+        const now = performance.now();
+        if (hasLast) {
+          const dt = now - lt;
+          const dist = Math.hypot(e.clientX - lx, e.clientY - ly);
+          // Time-decaying "energy" — only sustained frantic movement crosses the line.
+          energy = energy * Math.exp(-dt / 450) + dist;
+        }
+        lx = e.clientX; ly = e.clientY; lt = now; hasLast = true;
+        if (energy > 1500 && now > cooldownUntil) {
+          cooldownUntil = now + 9000; // ~9s breather between jokes
+          energy = 0;
+          let i = Math.floor(Math.random() * jokes.length);
+          if (jokes.length > 1 && i === lastIdx) i = (i + 1) % jokes.length;
+          lastIdx = i;
+          showToast(jokes[i]);
+        }
+      };
+      window.addEventListener("mousemove", onShake, { passive: true });
+      cleanups.push(() => {
+        window.removeEventListener("mousemove", onShake);
+        if (toastTimer) clearTimeout(toastTimer);
+        if (toastEl) { toastEl.remove(); toastEl = null; toastTxt = null; }
+      });
+    }
+
     /* ---- teardown ---- */
     return () => {
       if (revObs) revObs.disconnect();
