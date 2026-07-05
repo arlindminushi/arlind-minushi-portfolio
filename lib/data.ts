@@ -15,7 +15,7 @@ export const companies: Company[] = [
     period: "2025 — NOW",
     logo: "/uploads/genpactlogo.jpg",
     blurb:
-      "Principal Consultant & Tech Lead. I lead a 16-person engineering team and help steer the Kosovo data-engineering practice — delivery, hiring, and technical direction across enterprise engagements.",
+      "Principal Consultant & Tech Lead. I lead the engineering team and help steer the Kosovo data-engineering practice — delivery, hiring, and technical direction across enterprise engagements.",
   },
   {
     name: "Xponentl Data",
@@ -93,7 +93,7 @@ export type Capability = {
 export const capabilities: Capability[] = [
   {
     title: "Engineering Leadership",
-    body: "Leading a 16-person team day to day — sprint delivery, performance reviews, career growth, resource planning, and holding the hiring bar. I optimize for engineers who can own a problem end to end.",
+    body: "Leading an engineering team day to day — sprint delivery, performance reviews, career growth, resource planning, and holding the hiring bar. I optimize for engineers who can own a problem end to end.",
   },
   {
     title: "Full-Stack Engineering",
@@ -235,7 +235,7 @@ export const chatQA: ChatQA[] = [
   },
   {
     q: "How do you lead a team?",
-    a: "I lead a 16-person engineering team day to day — sprint delivery, code reviews, performance reviews, career growth and hiring. Rules of thumb: ship small and review everything, hire for trajectory, and remember the hard part is people, not code.",
+    a: "I lead a team of engineers day to day — sprint delivery, code reviews, performance reviews, career growth and hiring. Rules of thumb: ship small and review everything, hire for trajectory, and remember the hard part is people, not code.",
     keywords: ["lead", "team", "manage", "management", "people", "mentor"],
   },
   {
