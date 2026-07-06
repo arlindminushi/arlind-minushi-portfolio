@@ -10,9 +10,11 @@ import Work from "./Work";
 import Experience from "./Experience";
 import Companies from "./Companies";
 import About from "./About";
+import Testimonial from "./Testimonial";
 import Credentials from "./Credentials";
 import Gallery from "./Gallery";
 import AskAI from "./AskAI";
+import PenaltyGame from "./PenaltyGame";
 import MarqueeBottom from "./MarqueeBottom";
 import Contact from "./Contact";
 
@@ -49,9 +51,11 @@ export default function Portfolio() {
         <Experience />
         <Companies />
         <About />
+        <Testimonial />
         <Credentials />
         <Gallery />
         <AskAI />
+        <PenaltyGame />
         <MarqueeBottom />
         <Contact />
       </main>

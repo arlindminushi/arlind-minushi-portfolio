@@ -4,7 +4,7 @@ export default function Contact() {
       <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
           <div>
-            <span data-reveal style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '12px', letterSpacing: '.22em', color: '#8a887d', display: 'block', marginBottom: '22px' }}>09 — SAY HELLO</span>
+            <span data-reveal style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '12px', letterSpacing: '.22em', color: '#8a887d', display: 'block', marginBottom: '22px' }}>10 — SAY HELLO</span>
             <h2 data-reveal style={{ margin: 0, fontSize: 'clamp(54px,10vw,150px)', fontWeight: 700, letterSpacing: '-.035em', lineHeight: '.86' }}>Let’s<br /><em style={{ fontFamily: 'var(--font-instrument-serif)', fontWeight: 400, color: 'var(--accent)' }}>talk.</em></h2>
             <div data-reveal style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: 'clamp(12px,1.3vw,14px)', letterSpacing: '.03em', color: 'var(--accent)', margin: 'clamp(26px,4vh,38px) 0 0', lineHeight: '1.65', maxWidth: '460px' }}>Building enterprise data and platform systems in Pristina.</div>
             <p data-reveal style={{ margin: 'clamp(18px,2.5vh,26px) 0 0', maxWidth: '460px', fontSize: '16.5px', lineHeight: '1.65', color: '#b9b7ac', fontWeight: 300 }}>Whether it’s about systems, scaling teams, or just the craft — I’m always happy to talk. Reach out through any of the channels below and I’ll get back to you.</p>
@@ -18,7 +18,14 @@ export default function Contact() {
             <a href="/arlind-minushi.vcf" download="Arlind-Minushi.vcf" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginTop: '32px', fontFamily: 'var(--font-jetbrains-mono)', fontSize: '13px', letterSpacing: '.08em', color: 'var(--dark)', background: '#eceae2', textDecoration: 'none', padding: '16px 24px', borderRadius: '2px', transition: 'background .3s,color .3s' }} data-style-hover="background:var(--accent);color:#fff;">SAVE MY CONTACT ↓</a>
           </div>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px', marginTop: 'clamp(56px,9vh,100px)', paddingTop: '28px', borderTop: '1px solid var(--dline)', fontFamily: 'var(--font-jetbrains-mono)', fontSize: '12px', color: '#8a887d' }}>
+        <div data-reveal style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'clamp(46px,7vh,82px)' }}>
+          <svg viewBox="0 0 460 160" width="200" height="70" role="img" aria-label="Arlind Minushi signature" style={{ opacity: 0.9 }}>
+            <text x="18" y="118" fill="#c9c6bb" fontSize="132" style={{ fontFamily: 'var(--font-sacramento)' }}>A</text>
+            <text x="188" y="104" fill="#c9c6bb" fontSize="66" style={{ fontFamily: 'var(--font-sacramento)' }}>Minushi</text>
+            <path d="M52 130 C 190 146, 330 136, 430 108" fill="none" stroke="#c9c6bb" strokeWidth="3.2" strokeLinecap="round" />
+          </svg>
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px', marginTop: 'clamp(40px,6vh,64px)', paddingTop: '28px', borderTop: '1px solid var(--dline)', fontFamily: 'var(--font-jetbrains-mono)', fontSize: '12px', color: '#8a887d' }}>
           <div>Arlind Minushi — Senior Software Engineer</div>
           <div>Designed &amp; built in Prishtina · © 2026</div>
           <a href="#home" style={{ color: '#8a887d', textDecoration: 'none', transition: 'color .3s' }} data-style-hover="color:var(--accent);">BACK TO TOP ↑</a>

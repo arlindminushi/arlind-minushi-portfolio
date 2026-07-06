@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-import { siteConfig } from "./site";
+import { readFileSync } from "fs";
+import { join } from "path";
 
 // Shared brand palette for the generated social/OG images.
 const PAPER = "#f3f0e8";
@@ -92,7 +93,13 @@ export function renderOgImage() {
   );
 }
 
-/** Square accent monogram used for the favicon and the Apple touch icon. */
+// Handwritten signature "A" (Sacramento) for the favicon + Apple touch icon.
+// Read once at module scope from disk (works during the static build/prerender).
+const sacramentoData = readFileSync(
+  join(process.cwd(), "lib", "Sacramento-Regular.ttf")
+);
+
+/** Square signature-"A" mark used for the favicon and the Apple touch icon. */
 export function renderMonogram(px: number) {
   return new ImageResponse(
     (
@@ -103,18 +110,21 @@ export function renderMonogram(px: number) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: ACCENT,
+          background: INK,
           color: PAPER,
-          fontFamily: "sans-serif",
-          fontWeight: 700,
-          fontSize: Math.round(px * 0.46),
-          letterSpacing: Math.round(px * -0.02),
+          fontFamily: "Sacramento",
+          fontSize: Math.round(px * 0.98),
+          // nudge the script glyph to sit optically centred in the tile
+          paddingTop: Math.round(px * 0.06),
         }}
       >
-        {siteConfig.firstName[0]}
-        {siteConfig.lastName[0]}
+        A
       </div>
     ),
-    { width: px, height: px }
+    {
+      width: px,
+      height: px,
+      fonts: [{ name: "Sacramento", data: sacramentoData, style: "normal", weight: 400 }],
+    }
   );
 }
