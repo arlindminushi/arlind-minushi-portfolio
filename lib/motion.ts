@@ -29,6 +29,8 @@ export function useFrame(fn: FrameFn) {
 
 export const EXPO = "cubic-bezier(.16,1,.3,1)";
 export const NARROW = 760;
+/** Below this viewport height (e.g. phones in landscape) tall pinned screens can't fit. */
+export const SHORT = 560;
 
 export const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 
@@ -49,6 +51,10 @@ export function scrollToTop() {
 
 export function isNarrow() {
   return typeof window !== "undefined" && window.innerWidth < NARROW;
+}
+
+export function isShort() {
+  return typeof window !== "undefined" && window.innerHeight < SHORT;
 }
 
 export function useMediaQuery(query: string) {
@@ -79,18 +85,25 @@ export function useReveals(root: React.RefObject<HTMLElement | null>) {
       r.style.transform = "translateY(40px)";
       r.style.transition = `opacity .9s ease,transform 1s ${EXPO}`;
     });
+    // A [data-up] word starts pushed out of its overflow-hidden mask, so it can never
+    // "intersect" on its own; watch the mask and reveal the word inside it.
+    const revealOf = new Map<Element, HTMLElement>();
+    ups.forEach((u) => revealOf.set(u.parentElement ?? u, u));
+    rv.forEach((r) => revealOf.set(r, r));
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
-          const t = e.target as HTMLElement;
-          t.style.opacity = "1";
-          t.style.transform = "none";
-          io.unobserve(t);
+          const t = revealOf.get(e.target);
+          if (t) {
+            t.style.opacity = "1";
+            t.style.transform = "none";
+          }
+          io.unobserve(e.target);
         }),
       { threshold: 0.1 }
     );
-    [...ups, ...rv].forEach((x) => io.observe(x));
+    revealOf.forEach((_, watched) => io.observe(watched));
     return () => io.disconnect();
   }, [root]);
 }
