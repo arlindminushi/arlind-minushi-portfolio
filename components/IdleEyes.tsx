@@ -132,6 +132,7 @@ export default function IdleEyes() {
       roamT = later(roam, roamDue - performance.now());
     };
     const show = () => {
+      anchor.style.visibility = "visible";
       wrap.style.transform = "translateY(0)";
       shown = true;
       scheduleRoam();
@@ -142,6 +143,9 @@ export default function IdleEyes() {
       activeUntil = performance.now() + 900;
       if (!keepBubble) hush();
       stopRoam();
+      // Parked just past the edge isn't enough on its own: iOS Safari paints page content
+      // behind its translucent toolbar, so the tucked-away head would still peek through.
+      later(() => { if (!shown) anchor.style.visibility = "hidden"; }, 800);
     };
     function roam() {
       roamT = undefined;
@@ -308,7 +312,7 @@ export default function IdleEyes() {
       <div
         ref={anchorRef}
         aria-hidden="true"
-        style={{ position: "fixed", left: "calc(100% - 90px)", bottom: 0, width: 0, height: 0, zIndex: 9980 }}
+        style={{ position: "fixed", left: "calc(100% - 90px)", bottom: 0, width: 0, height: 0, zIndex: 9980, visibility: "hidden" }}
       >
         <div
           ref={wrapRef}
