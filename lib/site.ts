@@ -18,17 +18,16 @@ export const siteConfig = {
   name: "Arlind Minushi",
   firstName: "Arlind",
   lastName: "Minushi",
-  title: "Arlind Minushi — Senior Software Engineer",
-  jobTitle: "Senior Software Engineer · Tech Lead · Engineering Manager",
+  title: "Arlind Minushi — Senior Tech Lead, Application Development",
+  jobTitle: "Senior Tech Lead – Application Development · Genpact",
   // Kept within ~155 chars so Google shows it without truncation.
   description:
-    "Senior Software Engineer, Tech Lead & Engineering Manager in Prishtina, Kosovo, building enterprise data platforms with Python, Django, React and Databricks.",
+    "Senior Tech Lead – Application Development at Genpact in Prishtina, Kosovo, leading a 16-person team building enterprise platforms with Python, Django, React and Databricks.",
   // Bump when the site's content meaningfully changes (used for sitemap lastmod).
-  lastUpdated: "2026-06-29",
+  lastUpdated: "2026-10-18",
   locale: "en_US",
   email: "arlind.minushi06@gmail.com",
-  phone: "+383 49 313 126",
-  portrait: "/uploads/Un-6f052e6c.jpg",
+  portrait: "/uploads/portrait.jpg",
   location: {
     city: "Prishtina",
     region: "District of Pristina",
@@ -40,6 +39,7 @@ export const siteConfig = {
   sameAs: ["https://www.linkedin.com/in/arlind-minushi-1b61a51a4/"],
   keywords: [
     "Arlind Minushi",
+    "Senior Tech Lead",
     "Senior Software Engineer",
     "Tech Lead",
     "Engineering Manager",
@@ -81,7 +81,7 @@ export const siteConfig = {
     "Cloud Security",
     "Agile",
   ],
-  ogAlt: "Arlind Minushi — Senior Software Engineer, Tech Lead & Engineering Manager",
+  ogAlt: "Arlind Minushi — Senior Tech Lead, Application Development at Genpact",
 } as const;
 
 export type SiteConfig = typeof siteConfig;

@@ -2,6 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
 
+  // Photos are served at q90 (logos/UI stay at the default 75). Declared explicitly
+  // because newer Next versions reject qualities that aren't listed here.
+  images: {
+    qualities: [75, 90],
+  },
+
   // Baseline security headers (light SEO/hardening signal). HSTS is honoured only
   // over HTTPS, so it is a no-op in local http dev and active in production.
   async headers() {

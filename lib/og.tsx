@@ -75,7 +75,7 @@ export function renderOgImage() {
               color: INK2,
             }}
           >
-            Senior Software Engineer · Tech Lead · Engineering Manager
+            Senior Tech Lead · Application Development · Genpact
           </div>
         </div>
 

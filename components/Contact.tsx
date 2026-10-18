@@ -1,35 +1,75 @@
-export default function Contact() {
+"use client";
+
+import { useRef, useState } from "react";
+import { content as C } from "@/lib/content";
+import { scrollToTop } from "@/lib/motion";
+
+const RING = "OPEN TO CONNECT · SYSTEMS · TEAMS · THE CRAFT · PRISHTINA (CET) ·";
+
+// "Magnetic" contact: a circular mail button that leans toward the cursor.
+export default function Contact({ hasResume }: { hasResume: boolean }) {
+  const btnRef = useRef<HTMLAnchorElement>(null);
+  const txtRef = useRef<HTMLSpanElement>(null);
+  const [copied, setCopied] = useState(false);
+  const mail = `mailto:${C.contact.email}`;
+
+  const onMove = (e: React.MouseEvent) => {
+    const b = btnRef.current;
+    if (!b) return;
+    const r = b.getBoundingClientRect(), dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+    const on = Math.hypot(dx, dy) < r.width * 1.3;
+    b.style.transform = on ? `translate(${(dx * 0.28).toFixed(1)}px,${(dy * 0.28).toFixed(1)}px)` : "none";
+    if (txtRef.current) txtRef.current.style.transform = on ? `translate(${(dx * 0.12).toFixed(1)}px,${(dy * 0.12).toFixed(1)}px)` : "none";
+  };
+  const onLeave = () => {
+    if (btnRef.current) btnRef.current.style.transform = "none";
+    if (txtRef.current) txtRef.current.style.transform = "none";
+  };
+  const copy = () => {
+    const done = () => { setCopied(true); setTimeout(() => setCopied(false), 1600); };
+    try {
+      navigator.clipboard.writeText(C.contact.email).then(done, () => { window.location.href = mail; });
+    } catch {
+      window.location.href = mail;
+    }
+  };
+
   return (
-    <section id="contact" style={{ padding: 'clamp(86px,15vh,180px) clamp(20px,5vw,64px) clamp(50px,7vh,80px)', background: 'var(--dark)', color: '#eceae2' }}>
-      <div style={{ maxWidth: '1320px', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 'clamp(40px,6vw,90px)', alignItems: 'start' }}>
-          <div>
-            <span data-reveal style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '12px', letterSpacing: '.22em', color: '#8a887d', display: 'block', marginBottom: '22px' }}>10 — SAY HELLO</span>
-            <h2 data-reveal style={{ margin: 0, fontSize: 'clamp(54px,10vw,150px)', fontWeight: 700, letterSpacing: '-.035em', lineHeight: '.86' }}>Let’s<br /><em style={{ fontFamily: 'var(--font-instrument-serif)', fontWeight: 400, color: 'var(--accent)' }}>talk.</em></h2>
-            <div data-reveal style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: 'clamp(12px,1.3vw,14px)', letterSpacing: '.03em', color: 'var(--accent)', margin: 'clamp(26px,4vh,38px) 0 0', lineHeight: '1.65', maxWidth: '460px' }}>Building enterprise data and platform systems in Pristina.</div>
-            <p data-reveal style={{ margin: 'clamp(18px,2.5vh,26px) 0 0', maxWidth: '460px', fontSize: '16.5px', lineHeight: '1.65', color: '#b9b7ac', fontWeight: 300 }}>Whether it’s about systems, scaling teams, or just the craft — I’m always happy to talk. Reach out through any of the channels below and I’ll get back to you.</p>
-            <div data-reveal style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: 'clamp(18px,2.5vh,24px)', fontFamily: 'var(--font-jetbrains-mono)', fontSize: '12px', color: '#8a887d', letterSpacing: '.04em' }}><span style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'var(--accent)' }}></span>Based in Pristina (CET), usually replies within a day.</div>
-          </div>
-          <div data-reveal style={{ display: 'flex', flexDirection: 'column' }}>
-            <a href="mailto:arlind.minushi06@gmail.com" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', padding: '22px 0', borderTop: '1px solid var(--dline)', textDecoration: 'none', color: '#eceae2', transition: 'color .3s,padding .3s' }} data-style-hover="color:var(--accent);padding-left:8px;"><span style={{ fontSize: 'clamp(16px,1.7vw,21px)', wordBreak: 'break-all' }}>arlind.minushi06@gmail.com</span><span style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '11px', color: '#8a887d', flex: 'none' }}>EMAIL</span></a>
-            <a href="tel:+38349313126" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', padding: '22px 0', borderTop: '1px solid var(--dline)', textDecoration: 'none', color: '#eceae2', transition: 'color .3s,padding .3s' }} data-style-hover="color:var(--accent);padding-left:8px;"><span style={{ fontSize: 'clamp(16px,1.7vw,21px)' }}>+383 49 313 126</span><span style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '11px', color: '#8a887d', flex: 'none' }}>PHONE</span></a>
-            <a href="https://www.linkedin.com/in/arlind-minushi-1b61a51a4/" target="_blank" rel="noopener" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', padding: '22px 0', borderTop: '1px solid var(--dline)', textDecoration: 'none', color: '#eceae2', transition: 'color .3s,padding .3s' }} data-style-hover="color:var(--accent);padding-left:8px;"><span style={{ fontSize: 'clamp(16px,1.7vw,21px)' }}>/in/arlind-minushi ↗</span><span style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '11px', color: '#8a887d', flex: 'none' }}>LINKEDIN</span></a>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '16px', padding: '22px 0', borderBlock: '1px solid var(--dline)' }}><span style={{ fontSize: 'clamp(16px,1.7vw,21px)' }}>Prishtina, Kosovo</span><span style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '11px', color: '#8a887d', flex: 'none' }}>LOCATION</span></div>
-            <a href="/arlind-minushi.vcf" download="Arlind-Minushi.vcf" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginTop: '32px', fontFamily: 'var(--font-jetbrains-mono)', fontSize: '13px', letterSpacing: '.08em', color: 'var(--dark)', background: '#eceae2', textDecoration: 'none', padding: '16px 24px', borderRadius: '2px', transition: 'background .3s,color .3s' }} data-style-hover="background:var(--accent);color:#fff;">SAVE MY CONTACT ↓</a>
-          </div>
-        </div>
-        <div data-reveal style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'clamp(46px,7vh,82px)' }}>
-          <svg viewBox="0 0 460 160" width="200" height="70" role="img" aria-label="Arlind Minushi signature" style={{ opacity: 0.9 }}>
-            <text x="18" y="118" fill="#c9c6bb" fontSize="132" style={{ fontFamily: 'var(--font-sacramento)' }}>A</text>
-            <text x="188" y="104" fill="#c9c6bb" fontSize="66" style={{ fontFamily: 'var(--font-sacramento)' }}>Minushi</text>
-            <path d="M52 130 C 190 146, 330 136, 430 108" fill="none" stroke="#c9c6bb" strokeWidth="3.2" strokeLinecap="round" />
-          </svg>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px', marginTop: 'clamp(40px,6vh,64px)', paddingTop: '28px', borderTop: '1px solid var(--dline)', fontFamily: 'var(--font-jetbrains-mono)', fontSize: '12px', color: '#8a887d' }}>
-          <div>Arlind Minushi — Senior Software Engineer</div>
-          <div>Designed &amp; built in Prishtina · © 2026</div>
-          <a href="#home" style={{ color: '#8a887d', textDecoration: 'none', transition: 'color .3s' }} data-style-hover="color:var(--accent);">BACK TO TOP ↑</a>
-        </div>
+    <section className="contact" id="contact" onMouseMove={onMove} onMouseLeave={onLeave}>
+      <span className="mono-label">SAY HELLO</span>
+      <div className="mag">
+        <svg viewBox="0 0 200 200" className="mag-ring" aria-hidden="true">
+          <defs><path id="amRing" d="M100,100 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0" /></defs>
+          <text><textPath href="#amRing" textLength="560" lengthAdjust="spacing">{RING}</textPath></text>
+        </svg>
+        <a ref={btnRef} href={mail} className="mag-btn">
+          <span ref={txtRef} className="mag-txt">
+            <span className="mag-big">Let’s talk</span>
+            <span className="mono-xs" style={{ letterSpacing: ".14em" }}>WRITE ME →</span>
+          </span>
+        </a>
+      </div>
+      <p className="body-p" style={{ maxWidth: 520, fontSize: 16 }}>{C.contact.lead}</p>
+      <div className="contact-btns">
+        <button type="button" className="ghost-btn" onClick={copy}>{copied ? "COPIED ✓" : `${C.contact.email} — COPY`}</button>
+        <a className="ghost-btn" href={C.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+        {hasResume && <a className="ghost-btn" href={C.contact.resume} download>Résumé ↓</a>}
+      </div>
+      <div className="contact-foot">
+        <span>{C.contact.note}</span>
+        <a
+          href="#top"
+          className="seal"
+          aria-label="Back to top"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToTop();
+          }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/am-seal-white-transparent.svg" alt="" />
+        </a>
+        <span>© 2026 {C.name}</span>
       </div>
     </section>
   );

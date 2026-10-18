@@ -1,36 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Instrument_Serif, JetBrains_Mono, Sacramento } from "next/font/google";
+import { Familjen_Grotesk, Spline_Sans_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { siteConfig } from "@/lib/site";
+import { content } from "@/lib/content";
+import CornerLogo from "@/components/CornerLogo";
+import IdleEyes from "@/components/IdleEyes";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const familjen = Familjen_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
+  variable: "--font-familjen",
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
+const splineMono = Spline_Sans_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
-
-// Handwritten signature — used for the "A · Minushi" sign-off in the Contact section.
-const sacramento = Sacramento({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-sacramento",
+  variable: "--font-spline-mono",
   display: "swap",
 });
 
@@ -55,6 +42,13 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png" }],
+  },
   openGraph: {
     type: "profile",
     firstName: siteConfig.firstName,
@@ -62,8 +56,8 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: siteConfig.title,
-    description: siteConfig.description,
+    title: "Arlind Minushi — Senior Tech Lead",
+    description: content.intro,
   },
   twitter: {
     card: "summary_large_image",
@@ -84,11 +78,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f3f0e8" },
-    { media: "(prefers-color-scheme: dark)", color: "#13130f" },
-  ],
-  colorScheme: "light",
+  themeColor: "#000000",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -101,9 +92,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${sacramento.variable}`}
+      className={`${familjen.variable} ${splineMono.variable}`}
     >
       <body>
+        {/* Without JS the intro never runs, so show the hero in its final state. */}
+        <noscript>
+          <style>{`.hero-name{opacity:1!important}.hero-pic{clip-path:none!important}`}</style>
+        </noscript>
+        <CornerLogo />
+        <IdleEyes />
         {children}
         <Analytics />
       </body>

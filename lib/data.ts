@@ -303,13 +303,6 @@ export type GalleryItem = {
 
 export const gallery: GalleryItem[] = [
   {
-    src: "/uploads/Un3.jpg",
-    alt: "Arlind at the office in Prishtina",
-    caption: "On the floor in Prishtina — where the team and the work come together.",
-    width: 1315,
-    height: 1536,
-  },
-  {
     src: "/uploads/Un2.jpg",
     alt: "With mentor and friends",
     caption: "Mentors and friends. The people who shape how you lead.",

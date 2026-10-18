@@ -14,12 +14,11 @@ export function getStructuredData() {
     name: siteConfig.name,
     givenName: siteConfig.firstName,
     familyName: siteConfig.lastName,
-    jobTitle: "Senior Software Engineer, Tech Lead & Engineering Manager",
+    jobTitle: "Senior Tech Lead – Application Development",
     description: siteConfig.description,
     url,
     image: `${url}${siteConfig.portrait}`,
     email: `mailto:${siteConfig.email}`,
-    telephone: siteConfig.phone,
     address: {
       "@type": "PostalAddress",
       addressLocality: siteConfig.location.city,
@@ -29,7 +28,7 @@ export function getStructuredData() {
     sameAs: siteConfig.sameAs,
     worksFor: {
       "@type": "Organization",
-      name: "Genpact / Xponentl Data",
+      name: "Genpact",
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
@@ -38,7 +37,7 @@ export function getStructuredData() {
     knowsAbout: siteConfig.knowsAbout,
     hasOccupation: {
       "@type": "Occupation",
-      name: "Senior Software Engineer",
+      name: "Senior Tech Lead – Application Development",
       occupationLocation: {
         "@type": "City",
         name: siteConfig.location.city,
