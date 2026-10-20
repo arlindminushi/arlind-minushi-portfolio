@@ -37,8 +37,7 @@ export const content = {
     name: "Genpact × Agilyti Hackathon",
     place: "2nd",
     line: "A full weekend of ideas, late builds, and a lot of good energy in the room.",
-    proud: "Proud of my team for taking 2nd place and for how they showed up from start to finish:",
-    team: ["Petrit Rexha", "Rinesa Merovci", "Lundrim Maxhuni", "Alban Rrahmani"],
+    proud: "Proud of my team for taking 2nd place and for how they showed up from start to finish.",
     photos: [
       { src: "/uploads/hack-group.jpg", alt: "Hackathon participants and mentors on stage" },
       { src: "/uploads/hack-award.jpg", alt: "Award moment at the Genpact × Agilyti Hackathon", focus: "44% 50%" },

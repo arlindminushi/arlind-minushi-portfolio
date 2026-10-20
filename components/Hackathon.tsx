@@ -49,9 +49,6 @@ export function HackathonDetails() {
         <p data-rv className="hd-line">{C.hack.line}</p>
         <div data-rv className="hd-team">
           <p className="body-p" style={{ fontSize: 15.5 }}>{C.hack.proud}</p>
-          <div className="hd-names">
-            {C.hack.team.map((n) => <span key={n}>{n}</span>)}
-          </div>
         </div>
       </div>
       <div className="hd-quotes">
